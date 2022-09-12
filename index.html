@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
     <title>ToDo App</title>
 </head>
 <body>
@@ -13,12 +16,14 @@
         </header>
         <main>
             <div class="sidebar">
+                <form id="projectForm">
+                    <label for="projectInput">New Project</label>
+                    <input type="text" id="projectInput">
+                    <button id="projectButton" type="submit">Add</button>
+                </form>
                 <li class="active">Home</li>
-                <li>General Tasks</li>
-                <li>Workout</li>
-                <li>Chores</li>
-                <li>School</li>
-                <li>Deck Reno</li>
+                <div id="projectList">
+                </div>
             </div>
             <div class="content">
                 ..
