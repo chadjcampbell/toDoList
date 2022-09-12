@@ -1,4 +1,6 @@
+/* Main sections */
 body {
+    font-family: 'Berkshire Swash', cursive;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -17,6 +19,8 @@ header {
     height: 60px;
     background-color: #8bd3dd;
     padding: 10px;
+    border-bottom: 3px solid black;
+    z-index: 1;
 } 
 
 footer {
@@ -26,6 +30,7 @@ footer {
     height: 80px;
     background-color: #8bd3dd;    
     padding: 10px;
+    border-top: 1px solid black;
 }
 
 /* The side navigation menu */
@@ -36,51 +41,73 @@ footer {
     background-color: #f7c1d5;
     height: 100%;
     overflow: auto;
+    box-shadow: 3px 0px 17px 2px rgba(0,0,0,0.75);
   }
   
-  /* Sidebar links */
+.sidebar li {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 3px;
+  border-radius: 20px;
+}
+
+.sidebar li.active {
+  background-color: #aa3bc5;
+  color: white;
+}
+
+.sidebar li:hover:not(.active) {
+  background-color: rgb(205, 111, 255);
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    box-shadow: none;
+  }
+  .sidebar li {float: left;}
+  div.content {margin-left: 0; min-height: 500px;}
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
   .sidebar li {
-    display: block;
-    color: black;
-    padding: 16px;
-    text-decoration: none;
-    cursor: pointer;
+    text-align: center;
+    float: none;
   }
-  
-  /* Active/current link */
-  .sidebar li.active {
-    background-color: #aa3bc5;
-    color: white;
-  }
-  
-  /* Links on mouse-over */
-  .sidebar li:hover:not(.active) {
-    background-color: rgb(205, 111, 255);
-    color: white;
-  }
-  
-  /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
-  div.content {
-    margin-left: 200px;
-    padding: 1px 16px;
-  }
-  
-  /* On screens that are less than 700px wide, make the sidebar into a topbar */
-  @media screen and (max-width: 700px) {
-    .sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
-    }
-    .sidebar li {float: left;}
-    div.content {margin-left: 0; min-height: 500px;}
-  }
-  
-  /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-  @media screen and (max-width: 400px) {
-    .sidebar li {
-      text-align: center;
-      float: none;
-    }
-  }
-  
+}
+
+/* New project form */
+#projectForm {
+  display: block;
+  color: black;
+  padding: 16px;
+  margin: 3px;
+  border-radius: 20px;
+  background-color: #fef6e4;
+  border-radius: 20px;
+}
+
+#projectForm input {
+  border-radius: 5px;
+  margin: 3px;
+}
+
+#projectForm button {
+  font-family: inherit;
+  border-radius: 5px;
+  background-color: #aa3bc5;
+  cursor: pointer;
+}
