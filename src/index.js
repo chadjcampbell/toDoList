@@ -6,13 +6,18 @@ const projectInput = document.querySelector('#projectInput')
 
 const LOCAL_STORAGE_KEY = 'todo.projects'
 const LOCAL_STORAGE_PROJECT_ID = 'todo.projectId'
-let projects =  JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [{id: 0, name: 'Home', tasks: []}, {id: 1, name: 'General', tasks: []}]
-let projectId = localStorage.getItem(LOCAL_STORAGE_PROJECT_ID)
+
+let projects =  JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || 
+[{id: 0, name: 'Home', tasks: []}, {id: 1, name: 'General', tasks: []}]
+
+let projectId = localStorage.getItem(LOCAL_STORAGE_PROJECT_ID) || '0'
 
 projectList.addEventListener('click', event => {
     if (event.target.tagName.toLowerCase() == 'li') {
         projectId = event.target.dataset.projectId
+        saveProjects()
         renderProjects()
+        renderContent()
     }
 })
 
@@ -33,6 +38,7 @@ function createProject(name) {
 
 function saveProjects() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(projects))
+    localStorage.setItem(LOCAL_STORAGE_PROJECT_ID, projectId)
 }
 
 function renderProjects () {
@@ -56,3 +62,18 @@ function clearElement(element) {
 }
 
 renderProjects()
+
+
+//Projects pages
+
+const content = document.querySelector('.content')
+
+function renderContent () {
+    clearElement(content)
+    const currentProject = projects.find(project => {
+        return project.id == projectId
+    })
+    const currentProjectH2 = document.createElement('h2')
+    currentProjectH2.textContent = currentProject.name
+    content.append(currentProjectH2)
+}
