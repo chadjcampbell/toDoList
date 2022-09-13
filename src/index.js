@@ -10,7 +10,7 @@ const LOCAL_STORAGE_PROJECT_ID = 'todo.projectId'
 let projects =  JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || 
 [{id: 0, name: 'Home', tasks: []}, {id: 1, name: 'General', tasks: []}]
 
-let projectId = localStorage.getItem(LOCAL_STORAGE_PROJECT_ID) || '0'
+let projectId = localStorage.getItem(LOCAL_STORAGE_PROJECT_ID) || 0
 
 projectList.addEventListener('click', event => {
     if (event.target.tagName.toLowerCase() == 'li') {
@@ -76,4 +76,21 @@ function renderContent () {
     const currentProjectH2 = document.createElement('h2')
     currentProjectH2.textContent = currentProject.name
     content.append(currentProjectH2)
+
+    if (currentProject.id > 1) {
+        const deleteProjectButton = document.createElement('button')
+        deleteProjectButton.textContent = 'Delete Project'
+        content.append(deleteProjectButton)
+
+        deleteProjectButton.addEventListener('click', () => {
+            projects.splice(projects.findIndex(project => project.id === currentProject.id), 1)
+            projectId = 0
+            saveProjects()
+            renderProjects()
+            renderContent()
+        })
+    }
+
 }
+
+renderContent()
