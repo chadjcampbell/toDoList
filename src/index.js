@@ -80,6 +80,7 @@ function renderContent () {
     if (currentProject.id > 1) {
         const deleteProjectButton = document.createElement('button')
         deleteProjectButton.textContent = 'Delete Project'
+        deleteProjectButton.id = 'deleteProjectButton'
         content.append(deleteProjectButton)
 
         deleteProjectButton.addEventListener('click', () => {
@@ -90,7 +91,16 @@ function renderContent () {
             renderContent()
         })
     }
+    function renderTasks () {
 
+    }
+    function addTask () {
+        const addTaskButton = document.createElement('button')
+        addTaskButton.id = 'addTaskButton'
+        addTaskButton.textContent = '+ New Task'
+        content.append(addTaskButton)
+    }
+    addTask()
 }
 
 renderContent()

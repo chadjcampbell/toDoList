@@ -8,6 +8,7 @@ body {
 }
 
 main {
+    display: flex;
     height: 100%;
     background-color: #fef6e4;
 }
@@ -31,6 +32,10 @@ footer {
     background-color: #8bd3dd;    
     padding: 10px;
     border-top: 1px solid black;
+}
+
+button:hover {
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
 
 /* The side navigation menu */
@@ -65,12 +70,18 @@ footer {
 }
 
 div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 40px; 
+}
+
+div.content > * {
+  margin: 5px;
 }
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
 @media screen and (max-width: 700px) {
+  main {display: inline;}
   .sidebar {
     width: 100%;
     height: auto;
@@ -103,11 +114,13 @@ div.content {
 #projectForm input {
   border-radius: 5px;
   margin: 3px;
+  width: 150px;
 }
 
 #projectForm button {
   font-family: inherit;
   color: white;
+  border: none;
   border-radius: 5px;
   background-color: #aa3bc5;
   cursor: pointer;
@@ -117,11 +130,23 @@ div.content {
 
 /* Main Content Area */
 
-.content button {
+#deleteProjectButton {
+  color: white;
   font-family: inherit;
   border-radius: 5px;
   background-color: #ff0000;
   cursor: pointer;
   width: 100px;
+  height: 30px;
+  border: none;
+}
+
+#addTaskButton {
+  font-family: inherit;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  background-color: #aa3bc5;
+  cursor: pointer;
   height: 30px;
 }
