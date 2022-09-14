@@ -8,7 +8,8 @@ const LOCAL_STORAGE_KEY = 'todo.projects'
 const LOCAL_STORAGE_PROJECT_ID = 'todo.projectId'
 
 let projects =  JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || 
-[{id: 0, name: 'Home', tasks: []}, {id: 1, name: 'General', tasks: []}]
+[{id: 0, name: 'Home', tasks: []}, 
+{id: 1, name: 'General', tasks: [{projectId: 2, id: 4, title: 'Test Task', description: 'This is a test', dueDate: '10/31/2022', priority: 'Low' }, {projectId: 3, id: 5, title: 'Test Num 2', description: 'This is another test', dueDate: '10/25/2022', priority: 'Medium' }]}]
 
 let projectId = localStorage.getItem(LOCAL_STORAGE_PROJECT_ID) || 0
 
@@ -93,14 +94,49 @@ function renderContent () {
     }
     function renderTasks () {
 
+        const headTaskLi = document.createElement('li')
+        content.append(headTaskLi)
+        const headTitle = document.createElement('h3')
+        headTitle.textContent = 'Name'
+        const headDescription = document.createElement('h6')
+        headDescription.textContent = 'Description'
+        const headDueDate = document.createElement('h6')
+        headDueDate.textContent = 'Due Date'
+        const headPriority = document.createElement('h6')
+        headPriority.textContent = 'Priority'
+        headTaskLi.append(headTitle, headDescription, headDueDate, headPriority)
+
+        currentProject.tasks.forEach(task => {
+            const taskLi = document.createElement('li')
+            content.append(taskLi)
+            const title = document.createElement('h3')
+            title.textContent = task.title
+            const description = document.createElement('h6')
+            description.textContent = task.description
+            const dueDate = document.createElement('h6')
+            dueDate.textContent = task.dueDate
+            const priority = document.createElement('h6')
+            priority.textContent = task.priority
+            taskLi.append(title, description, dueDate, priority)
+
+            const deleteTaskButton = document.createElement('button')
+            deleteTaskButton.textContent = 'Delete Task'
+            deleteTaskButton.id = 'deleteTaskButton'
+            taskLi.append(deleteTaskButton)
+
+
+        })
     }
+    if (currentProject.id > 0) { renderTasks() }
+    
+
     function addTask () {
         const addTaskButton = document.createElement('button')
         addTaskButton.id = 'addTaskButton'
         addTaskButton.textContent = '+ New Task'
         content.append(addTaskButton)
     }
-    addTask()
+    if (currentProject.id > 0) { addTask() } 
 }
 
 renderContent()
