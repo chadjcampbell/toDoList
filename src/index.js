@@ -9,7 +9,7 @@ const LOCAL_STORAGE_PROJECT_ID = 'todo.projectId'
 
 let projects =  JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || 
 [{id: 0, name: 'Home', tasks: []}, 
-{id: 1, name: 'General', tasks: [{projectId: 2, id: 4, title: 'Test Task', description: 'This is a test', dueDate: '10/31/2022', priority: 'Low' }, {projectId: 3, id: 5, title: 'Test Num 2', description: 'This is another test', dueDate: '10/25/2022', priority: 'Medium' }]}]
+{id: 1, name: 'General', tasks: [{pId: 2, id: 4, title: 'Test Task', description: 'This is a test', dueDate: '10/31/2022', priority: 'Low' }, {pId: 3, id: 5, title: 'Test Num 2', description: 'This is another test', dueDate: '10/25/2022', priority: 'Medium' }]}]
 
 let projectId = localStorage.getItem(LOCAL_STORAGE_PROJECT_ID) || 0
 
@@ -32,6 +32,12 @@ projectForm.addEventListener('submit', event => {
     saveProjects()
     renderProjects()
 })
+
+function createTask(title, description, dueDate , priority) {
+    if (description == '') description = 'No description'
+    if (dueDate == '') dueDate = 'No due date'
+    return {pId: projectId, id: Date.now(), title, description, dueDate, priority}
+}
 
 function createProject(name) {
     return {id: Date.now(), name: name, tasks: []}
@@ -123,12 +129,19 @@ function renderContent () {
 
             const deleteTaskButton = document.createElement('button')
             deleteTaskButton.textContent = 'Delete Task'
-            deleteTaskButton.id = 'deleteTaskButton'
+            deleteTaskButton.classList.add('deleteTaskButton')
+            deleteTaskButton.id = task.id
             taskLi.append(deleteTaskButton)
+
+            deleteTaskButton.addEventListener('click', event => {
+                currentProject.tasks.splice(currentProject.tasks.findIndex(tasks => tasks.id == event.target.id), 1)
+                saveProjects()
+                renderContent()
+            })
         })
     }
     if (currentProject.id > 0) { renderTasks() }
-    
+
     function openTaskForm () {
         const taskForm = document.createElement('form')
         taskForm.id = 'taskForm'
@@ -144,6 +157,7 @@ function renderContent () {
         nameInput.type = 'text'
         nameInput.id = 'taskName'
         nameInput.name = 'taskName'
+        nameInput.required = true
 
         const descriptionLabel = document.createElement('label')
         descriptionLabel.for = 'taskDescription'
@@ -180,7 +194,11 @@ function renderContent () {
         taskForm.append(head, nameLabel, nameInput, descriptionLabel, descriptionInput, dueDateLabel, dueDateInput, priorityLabel, priorityInput, taskSubmit, taskCancel)
 
         taskSubmit.addEventListener('click', event => {
-            //pick up here!!!!
+            if (nameInput.value == '' || nameInput.value == null) return 
+            const newTask = createTask(nameInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value)
+            currentProject.tasks.push(newTask)
+            saveProjects()
+            renderTasks()
         })
     }
 
