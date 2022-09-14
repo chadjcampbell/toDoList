@@ -71,9 +71,11 @@ const content = document.querySelector('.content')
 
 function renderContent () {
     clearElement(content)
+
     const currentProject = projects.find(project => {
         return project.id == projectId
     })
+
     const currentProjectH2 = document.createElement('h2')
     currentProjectH2.textContent = currentProject.name
     content.append(currentProjectH2)
@@ -123,20 +125,74 @@ function renderContent () {
             deleteTaskButton.textContent = 'Delete Task'
             deleteTaskButton.id = 'deleteTaskButton'
             taskLi.append(deleteTaskButton)
-
-
         })
     }
     if (currentProject.id > 0) { renderTasks() }
     
+    function openTaskForm () {
+        const taskForm = document.createElement('form')
+        taskForm.id = 'taskForm'
+        taskForm.reset()
+        content.append(taskForm)
+        const head = document.createElement('h3')
+        head.textContent = 'Add New Task'
+
+        const nameLabel = document.createElement('label')
+        nameLabel.for = 'taskName'
+        nameLabel.textContent = 'Name'
+        const nameInput = document.createElement('input')
+        nameInput.type = 'text'
+        nameInput.id = 'taskName'
+        nameInput.name = 'taskName'
+
+        const descriptionLabel = document.createElement('label')
+        descriptionLabel.for = 'taskDescription'
+        descriptionLabel.textContent = 'Description'
+        const descriptionInput = document.createElement('input')
+        descriptionInput.type = 'text'
+        descriptionInput.id = 'taskDescription'
+        descriptionInput.name = 'taskDescription'
+
+        const dueDateLabel = document.createElement('label')
+        dueDateLabel.for = 'taskDueDate'
+        dueDateLabel.textContent = 'Due Date'
+        const dueDateInput = document.createElement('input')
+        dueDateInput.type = 'date'
+        dueDateInput.id = 'taskDueDate'
+        dueDateInput.name = 'taskDueDate'
+
+        const priorityLabel = document.createElement('label')
+        priorityLabel.for = 'taskPriority'
+        priorityLabel.textContent = 'Priority'
+        const priorityInput = document.createElement('input')
+        priorityInput.type = 'text'
+        priorityInput.id = 'taskPriority'
+        priorityInput.name = 'taskPriority'
+
+        const taskSubmit = document.createElement('button')
+        taskSubmit.id = 'taskFormSubmit'
+        taskSubmit.textContent = 'Submit'
+
+        const taskCancel = document.createElement('button')
+        taskCancel.id = 'taskFormCancel'
+        taskCancel.textContent = 'Cancel'
+
+        taskForm.append(head, nameLabel, nameInput, descriptionLabel, descriptionInput, dueDateLabel, dueDateInput, priorityLabel, priorityInput, taskSubmit, taskCancel)
+
+        taskSubmit.addEventListener('click', event => {
+            //pick up here!!!!
+        })
+    }
 
     function addTask () {
         const addTaskButton = document.createElement('button')
         addTaskButton.id = 'addTaskButton'
         addTaskButton.textContent = '+ New Task'
         content.append(addTaskButton)
+
+        addTaskButton.addEventListener('click', openTaskForm)
     }
-    if (currentProject.id > 0) { addTask() } 
+    if (currentProject.id > 0) { addTask() }
 }
 
 renderContent()
