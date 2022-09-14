@@ -200,6 +200,11 @@ function renderContent () {
             saveProjects()
             renderTasks()
         })
+
+        taskCancel.addEventListener('click', event => {
+            event.preventDefault()
+            taskForm.style.display = 'none'
+        })
     }
 
     function addTask () {

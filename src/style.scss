@@ -9,6 +9,7 @@ body {
 
 main {
     display: flex;
+    overflow: auto;
     height: 100%;
     background-color: #fef6e4;
 }
