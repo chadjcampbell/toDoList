@@ -103,6 +103,7 @@ function renderContent () {
     function renderTasks () {
 
         const headTaskLi = document.createElement('li')
+        headTaskLi.id = 'headTaskLi'
         content.append(headTaskLi)
         const headTitle = document.createElement('h3')
         headTitle.textContent = 'Name'
@@ -112,7 +113,10 @@ function renderContent () {
         headDueDate.textContent = 'Due Date'
         const headPriority = document.createElement('h6')
         headPriority.textContent = 'Priority'
-        headTaskLi.append(headTitle, headDescription, headDueDate, headPriority)
+        const placer = document.createElement('h6')
+        placer.textContent = 'this is a placeholder space, should have used a table :-P'
+        placer.style.visibility = 'hidden'
+        headTaskLi.append(headTitle, headDescription, headDueDate, headPriority, placer)
 
         currentProject.tasks.forEach(task => {
             const taskLi = document.createElement('li')
@@ -126,6 +130,12 @@ function renderContent () {
             const priority = document.createElement('h6')
             priority.textContent = task.priority
             taskLi.append(title, description, dueDate, priority)
+
+            const editTaskButton = document.createElement('button')
+            editTaskButton.textContent = 'View/Edit'
+            editTaskButton.classList.add('editTaskButton')
+            editTaskButton.id = 'e' + task.id
+            taskLi.append(editTaskButton)
 
             const deleteTaskButton = document.createElement('button')
             deleteTaskButton.textContent = 'Delete Task'
@@ -175,13 +185,21 @@ function renderContent () {
         dueDateInput.id = 'taskDueDate'
         dueDateInput.name = 'taskDueDate'
 
-        const priorityLabel = document.createElement('label')
-        priorityLabel.for = 'taskPriority'
+        const priorityLabel = document.createElement('select')
         priorityLabel.textContent = 'Priority'
-        const priorityInput = document.createElement('input')
-        priorityInput.type = 'text'
-        priorityInput.id = 'taskPriority'
-        priorityInput.name = 'taskPriority'
+        priorityLabel.id = 'taskPriority'
+        priorityLabel.name = 'taskPriority'
+
+        const low = document.createElement('option')
+        low.selected = true
+        low.value = 'Low'
+        low.textContent = 'Low'
+        const medium = document.createElement('option')
+        medium.value = 'Medium'
+        medium.textContent = 'Medium'
+        const high = document.createElement('option')
+        high.value = 'High'
+        high.textContent = 'High'
 
         const taskSubmit = document.createElement('button')
         taskSubmit.id = 'taskFormSubmit'
@@ -191,11 +209,12 @@ function renderContent () {
         taskCancel.id = 'taskFormCancel'
         taskCancel.textContent = 'Cancel'
 
-        taskForm.append(head, nameLabel, nameInput, descriptionLabel, descriptionInput, dueDateLabel, dueDateInput, priorityLabel, priorityInput, taskSubmit, taskCancel)
+        taskForm.append(head, nameLabel, nameInput, descriptionLabel, descriptionInput, dueDateLabel, dueDateInput, priorityLabel, taskSubmit, taskCancel)
+        priorityLabel.append(low, medium, high)
 
         taskSubmit.addEventListener('click', event => {
             if (nameInput.value == '' || nameInput.value == null) return 
-            const newTask = createTask(nameInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value)
+            const newTask = createTask(nameInput.value, descriptionInput.value, dueDateInput.value, priorityLabel.value)
             currentProject.tasks.push(newTask)
             saveProjects()
             renderTasks()
