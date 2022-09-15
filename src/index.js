@@ -137,6 +137,12 @@ function renderContent () {
             editTaskButton.id = 'e' + task.id
             taskLi.append(editTaskButton)
 
+            editTaskButton.addEventListener('click', event =>{
+                const currentTaskId = event.target.id.substring(1)
+                const currentTaskObj = currentProject.tasks.find(tasks => tasks.id == currentTaskId)
+                openTaskForm(currentTaskObj)
+            })
+
             const deleteTaskButton = document.createElement('button')
             deleteTaskButton.textContent = 'Delete Task'
             deleteTaskButton.classList.add('deleteTaskButton')
@@ -152,7 +158,7 @@ function renderContent () {
     }
     if (currentProject.id > 0) { renderTasks() }
 
-    function openTaskForm () {
+    function openTaskForm (currentTaskObj) {
         const taskForm = document.createElement('form')
         taskForm.id = 'taskForm'
         taskForm.reset()
@@ -224,6 +230,11 @@ function renderContent () {
             event.preventDefault()
             taskForm.style.display = 'none'
         })
+
+        if (currentTaskObj.title != undefined) {
+            nameInput.value = currentTaskObj.title
+            //CONTINUE HEREEEEEEEEEEEEE
+        }
     }
 
     function addTask () {
