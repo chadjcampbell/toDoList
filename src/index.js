@@ -158,6 +158,7 @@ function renderContent () {
     }
     if (currentProject.id > 0) { renderTasks() }
 
+    // If currentTaskObj is passed to this, it will act as an edit window
     function openTaskForm (currentTaskObj) {
         const taskForm = document.createElement('form')
         taskForm.id = 'taskForm'
@@ -220,10 +221,13 @@ function renderContent () {
 
         taskSubmit.addEventListener('click', event => {
             if (nameInput.value == '' || nameInput.value == null) return 
+            if (currentTaskObj.title != undefined) {
+                currentProject.tasks.splice(currentProject.tasks.findIndex(tasks => tasks.id == currentTaskObj.id), 1)
+            }
             const newTask = createTask(nameInput.value, descriptionInput.value, dueDateInput.value, priorityLabel.value)
             currentProject.tasks.push(newTask)
             saveProjects()
-            renderTasks()
+            renderContent()
         })
 
         taskCancel.addEventListener('click', event => {
@@ -232,8 +236,11 @@ function renderContent () {
         })
 
         if (currentTaskObj.title != undefined) {
+            head.textContent = 'View/Edit Task'
             nameInput.value = currentTaskObj.title
-            //CONTINUE HEREEEEEEEEEEEEE
+            descriptionInput.value = currentTaskObj.description
+            dueDateInput.value = currentTaskObj.dueDate
+            priorityLabel.value = currentTaskObj.priority
         }
     }
 
