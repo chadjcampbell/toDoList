@@ -1,11 +1,17 @@
 import { clearElement, saveProjects, renderProjects, createTask, projects, projectId } from './index';
 
-export function renderContent () {
+function renderContent () {
     const content = document.querySelector('.content')
     clearElement(content)
 
+    // FIX THIIIIIS
     const currentProject = projects.find(project => {
-        return project.id == projectId
+        if (projectId != 0){
+            return project.id == projectId 
+        }
+        else {
+            return project.id == 0
+        }
     })
 
     const currentProjectH2 = document.createElement('h2')
@@ -20,7 +26,6 @@ export function renderContent () {
 
         deleteProjectButton.addEventListener('click', () => {
             projects.splice(projects.findIndex(project => project.id === currentProject.id), 1)
-            projectId = 0
             saveProjects()
             renderProjects()
             renderContent()
@@ -182,3 +187,5 @@ export function renderContent () {
     }
     if (currentProject.id > 0) { addTask() }
 }
+
+export { renderContent, projectId}
