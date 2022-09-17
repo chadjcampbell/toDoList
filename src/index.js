@@ -1,5 +1,6 @@
 import '../src/style.scss';
 import { renderContent } from './dom';
+import { renderHome } from './home';
 
 const projectList = document.querySelector('#projectList')
 const projectForm = document.querySelector('#projectForm')
@@ -9,8 +10,7 @@ const LOCAL_STORAGE_KEY = 'todo.projects'
 const LOCAL_STORAGE_PROJECT_ID = 'todo.projectId'
 
 let projects =  JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || 
-[{id: 0, name: 'Home', tasks: []}, 
-{id: 1, name: 'General', tasks: [{pId: 2, id: 4, title: 'Test Task', description: 'This is a test', dueDate: '10/31/2022', priority: 'Low' }, {pId: 3, id: 5, title: 'Test Num 2', description: 'This is another test', dueDate: '10/25/2022', priority: 'Medium' }]}]
+[{id: 0, name: 'Home', task: []}, {id: 1, name: 'General', tasks: [{pId: 2, id: 4, title: 'Test Task', description: 'This is a test', dueDate: '10/31/2022', priority: 'Low' }, {pId: 3, id: 5, title: 'Test Num 2', description: 'This is another test', dueDate: '10/25/2022', priority: 'Medium' }]}]
 
 let projectId = localStorage.getItem(LOCAL_STORAGE_PROJECT_ID) || 0
 
@@ -21,6 +21,12 @@ function setProjectId(value) {
 projectList.addEventListener('click', event => {
     if (event.target.tagName.toLowerCase() == 'li') {
         projectId = event.target.dataset.projectId
+        if (projectId == 0) {
+            saveProjects()
+            renderProjects()
+            renderHome()
+            return
+        }
         saveProjects()
         renderProjects()
         renderContent()
@@ -74,6 +80,8 @@ function clearElement(element) {
 }
 
 renderProjects()
-renderContent()
+
+if (projectId > 0) { renderContent() }
+else { renderHome() }
 
 export { projects, projectId, setProjectId ,clearElement, saveProjects, renderProjects, createProject, createTask}
