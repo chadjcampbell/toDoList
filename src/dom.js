@@ -1,4 +1,5 @@
 import { clearElement, saveProjects, renderProjects, createTask, projects, projectId, setProjectId } from './index';
+import { renderHome } from './home'
 
 function renderContent () {
     const content = document.querySelector('.content')
@@ -23,7 +24,8 @@ function renderContent () {
             setProjectId(0)
             saveProjects()
             renderProjects()
-            renderContent()
+            if (projectId > 0) { renderContent() }
+            else { renderHome() }
         })
     }
     function renderTasks () {
