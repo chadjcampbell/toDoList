@@ -10,7 +10,7 @@ const LOCAL_STORAGE_KEY = 'todo.projects'
 const LOCAL_STORAGE_PROJECT_ID = 'todo.projectId'
 
 let projects =  JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || 
-[{id: 0, name: 'Home', task: []}, {id: 1, name: 'General', tasks: [{pId: 2, id: 4, title: 'Test Task', description: 'This is a test', dueDate: '10/31/2022', priority: 'Low' }, {pId: 3, id: 5, title: 'Test Num 2', description: 'This is another test', dueDate: '10/25/2022', priority: 'Medium' }]}]
+[{id: 0, name: 'Home', tasks: []}, {id: 1, name: 'General', tasks: [{pId: 2, id: 4, title: 'Test Task', description: 'This is a test', dueDate: '10/31/2022', priority: 'Low' }, {pId: 3, id: 5, title: 'Test Num 2', description: 'This is another test', dueDate: '10/25/2022', priority: 'Medium' }]}]
 
 let projectId = localStorage.getItem(LOCAL_STORAGE_PROJECT_ID) || 0
 
