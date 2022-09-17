@@ -14,6 +14,10 @@ let projects =  JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ||
 
 let projectId = localStorage.getItem(LOCAL_STORAGE_PROJECT_ID) || 0
 
+function setProjectId(value) {
+    projectId = value
+}
+
 projectList.addEventListener('click', event => {
     if (event.target.tagName.toLowerCase() == 'li') {
         projectId = event.target.dataset.projectId
@@ -72,4 +76,4 @@ function clearElement(element) {
 renderProjects()
 renderContent()
 
-export { projects, projectId ,clearElement, saveProjects, renderProjects, createProject, createTask}
+export { projects, projectId, setProjectId ,clearElement, saveProjects, renderProjects, createProject, createTask}
