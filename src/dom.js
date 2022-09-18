@@ -30,21 +30,20 @@ function renderContent () {
     }
     function renderTasks () {
 
-        const headTaskLi = document.createElement('li')
-        headTaskLi.id = 'headTaskLi'
-        content.append(headTaskLi)
-        const headTitle = document.createElement('h3')
-        headTitle.textContent = 'Name'
-        const headDescription = document.createElement('h6')
-        headDescription.textContent = 'Description'
-        const headDueDate = document.createElement('h6')
-        headDueDate.textContent = 'Due Date'
-        const headPriority = document.createElement('h6')
-        headPriority.textContent = 'Priority'
-        const placer = document.createElement('h6')
-        placer.textContent = 'this is a placeholder space, should have used a table :-P'
-        placer.style.visibility = 'hidden'
-        headTaskLi.append(headTitle, headDescription, headDueDate, headPriority, placer)
+        const pTable = document.createElement('table')
+        content.append(pTable)
+        const trHead = document.createElement('tr')
+        pTable.append(trHead)
+        const hName = document.createElement('th')
+        hName.textContent = 'Name'
+        const hProject = document.createElement('th')
+        hProject.textContent = 'Decription'
+        const hDueDate = document.createElement('th')
+        hDueDate.textContent = 'Due Date'
+        const hPriority = document.createElement('th')
+        hPriority.textContent = 'Priority'
+        const emptyCell = document.createElement('th')
+        trHead.append(hName, hProject, hDueDate, hPriority, emptyCell.cloneNode(true), emptyCell.cloneNode(true))
 
         currentProject.tasks.forEach(task => {
             const taskLi = document.createElement('li')
