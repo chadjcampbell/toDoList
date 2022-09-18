@@ -4,12 +4,8 @@ function renderHome () {
     const content = document.querySelector('.content')
     clearElement(content)
 
-    const weekH2 = document.createElement('h2')
-    weekH2.textContent = 'Due This Week'
-    content.append(weekH2)
-
     const priorityH2 = document.createElement('h2')
-    priorityH2.textContent = 'High Priority'
+    priorityH2.textContent = 'High Priority Tasks'
     content.append(priorityH2)
 
     const pTable = document.createElement('table')
@@ -22,6 +18,7 @@ function renderHome () {
     hProject.textContent = 'Project'
     const hDueDate = document.createElement('th')
     hDueDate.textContent = 'Due Date'
+    hDueDate.classList.add('hideMobile')
     const hPriority = document.createElement('th')
     hPriority.textContent = 'Priority'
     trHead.append(hName, hProject, hDueDate, hPriority)
@@ -29,7 +26,6 @@ function renderHome () {
     projects.forEach(project => {
         const currentProjectName = project.name
             project.tasks.forEach(task => {
-                console.log(task)
                 if (task.priority == 'High') {
                     const tr = document.createElement('tr')
                     pTable.append(tr)
@@ -39,6 +35,7 @@ function renderHome () {
                     dProject.textContent = currentProjectName
                     const dDueDate = document.createElement('td')
                     dDueDate.textContent = task.dueDate
+                    dDueDate.classList.add('hideMobile')
                     const dPriority = document.createElement('td')
                     dPriority.textContent = task.priority
                     tr.append(dName, dProject, dDueDate, dPriority)

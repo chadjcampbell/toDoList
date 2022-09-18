@@ -10,7 +10,8 @@ const LOCAL_STORAGE_KEY = 'todo.projects'
 const LOCAL_STORAGE_PROJECT_ID = 'todo.projectId'
 
 let projects =  JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || 
-[{id: 0, name: 'Home', tasks: []}, {id: 1, name: 'General', tasks: [{pId: 2, id: 4, title: 'Test Task', description: 'This is a test', dueDate: '10/31/2022', priority: 'Low' }, {pId: 3, id: 5, title: 'Test Num 2', description: 'This is another test', dueDate: '10/25/2022', priority: 'Medium' }]}]
+[{"id":0,"name":"Home","tasks":[]},{"id":1,"name":"General","tasks":[{"pId":2,"id":4,"title":"Test Task","description":"This is a test","dueDate":"10/31/2022","priority":"Low"},{"pId":"1","id":1663532517642,"title":"Test Num 2","description":"This is another test","dueDate":"No due date","priority":"High"}]},{"id":1663525622897,"name":"School","tasks":[{"pId":"1663525622897","id":1663532484771,"title":"ES6 Modules","description":"Learn ins and outs of modules","dueDate":"2022-09-30","priority":"High"}]},{"id":1663525691392,"name":"Work","tasks":[{"pId":"1663525691392","id":1663525718661,"title":"TPS Reports","description":"Get these to Lumbergh stat!","dueDate":"2022-09-26","priority":"High"}]}]
+
 
 let projectId = localStorage.getItem(LOCAL_STORAGE_PROJECT_ID) || 0
 

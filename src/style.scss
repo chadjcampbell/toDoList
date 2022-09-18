@@ -110,7 +110,7 @@ input, select {
   }
   .sidebar li {float: left;}
   div.content {margin-left: 0; min-height: 500px;}
-  div.content h6 { display: none; }
+  .hideMobile {display: none;}
 }
 
 /* On screens that are less than 400px, display the bar vertically, instead of horizontally */

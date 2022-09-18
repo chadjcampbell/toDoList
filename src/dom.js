@@ -38,31 +38,39 @@ function renderContent () {
         hName.textContent = 'Name'
         const hProject = document.createElement('th')
         hProject.textContent = 'Decription'
+        hProject.classList.add('hideMobile')
         const hDueDate = document.createElement('th')
         hDueDate.textContent = 'Due Date'
+        hDueDate.classList.add('hideMobile')
         const hPriority = document.createElement('th')
         hPriority.textContent = 'Priority'
+        hPriority.classList.add('hideMobile')
         const emptyCell = document.createElement('th')
         trHead.append(hName, hProject, hDueDate, hPriority, emptyCell.cloneNode(true), emptyCell.cloneNode(true))
 
         currentProject.tasks.forEach(task => {
-            const taskLi = document.createElement('li')
-            content.append(taskLi)
-            const title = document.createElement('h3')
+            const taskLi = document.createElement('tr')
+            pTable.append(taskLi)
+            const title = document.createElement('td')
             title.textContent = task.title
-            const description = document.createElement('h6')
+            const description = document.createElement('td')
             description.textContent = task.description
-            const dueDate = document.createElement('h6')
+            description.classList.add('hideMobile')
+            const dueDate = document.createElement('td')
             dueDate.textContent = task.dueDate
-            const priority = document.createElement('h6')
+            dueDate.classList.add('hideMobile')
+            const priority = document.createElement('td')
             priority.textContent = task.priority
+            priority.classList.add('hideMobile')
             taskLi.append(title, description, dueDate, priority)
 
+            const buttonCell = document.createElement('td')
             const editTaskButton = document.createElement('button')
             editTaskButton.textContent = 'View/Edit'
             editTaskButton.classList.add('editTaskButton')
             editTaskButton.id = 'e' + task.id
-            taskLi.append(editTaskButton)
+            taskLi.append(buttonCell)
+            buttonCell.append(editTaskButton)
 
             editTaskButton.addEventListener('click', event =>{
                 const currentTaskId = event.target.id.substring(1)
@@ -70,11 +78,13 @@ function renderContent () {
                 openTaskForm(currentTaskObj)
             })
 
+            const buttonCell2 = document.createElement('td')
             const deleteTaskButton = document.createElement('button')
             deleteTaskButton.textContent = 'Delete Task'
             deleteTaskButton.classList.add('deleteTaskButton')
             deleteTaskButton.id = task.id
-            taskLi.append(deleteTaskButton)
+            taskLi.append(buttonCell2)
+            buttonCell2.append(deleteTaskButton)
 
             deleteTaskButton.addEventListener('click', event => {
                 currentProject.tasks.splice(currentProject.tasks.findIndex(tasks => tasks.id == event.target.id), 1)
