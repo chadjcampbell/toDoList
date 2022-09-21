@@ -1,38 +1,38 @@
 /* Main sections */
 body {
-    font-family: 'Berkshire Swash', cursive;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  font-family: "Berkshire Swash", cursive;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 main {
-    display: flex;
-    overflow: auto;
-    height: 100%;
-    background-color: #fef6e4;
+  display: flex;
+  overflow: auto;
+  height: 100%;
+  background-color: #fef6e4;
 }
 
 header {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    height: 60px;
-    background-color: #8bd3dd;
-    padding: 10px;
-    border-bottom: 3px solid black;
-    z-index: 1;
-} 
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  height: 60px;
+  background-color: #8bd3dd;
+  padding: 10px;
+  border-bottom: 3px solid black;
+  z-index: 1;
+}
 
 footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 80px;
-    background-color: #8bd3dd;    
-    padding: 10px;
-    border-top: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  background-color: #8bd3dd;
+  padding: 10px;
+  border-top: 1px solid black;
 }
 
 table {
@@ -40,27 +40,28 @@ table {
   empty-cells: show;
 }
 
-th, td {
+th,
+td {
   padding: 10px 0px;
   border-bottom: 1px solid black;
   text-align: start;
 }
 
 button:hover {
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
 /* The side navigation menu */
 .sidebar {
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    background-color: #f7c1d5;
-    height: 100%;
-    overflow: auto;
-    box-shadow: 3px 0px 17px 2px rgba(0,0,0,0.75);
-  }
-  
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f7c1d5;
+  height: 100%;
+  overflow: auto;
+  box-shadow: 3px 0px 17px 2px rgba(0, 0, 0, 0.75);
+}
+
 .sidebar li {
   display: block;
   color: black;
@@ -85,7 +86,7 @@ div.content {
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 10px 40px; 
+  padding: 10px 40px;
   position: relative;
 }
 
@@ -93,7 +94,8 @@ div.content > * {
   margin: 5px;
 }
 
-input, select {
+input,
+select {
   border: 1px solid #8bd3dd;
   border-radius: 10px;
   padding: 3px;
@@ -101,16 +103,25 @@ input, select {
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
 @media screen and (max-width: 850px) {
-  main {display: inline;}
+  main {
+    display: inline;
+  }
   .sidebar {
     width: 100%;
     height: auto;
     position: relative;
     box-shadow: none;
   }
-  .sidebar li {float: left;}
-  div.content {margin-left: 0; min-height: 500px;}
-  .hideMobile {display: none;}
+  .sidebar li {
+    float: left;
+  }
+  div.content {
+    margin-left: 0;
+    min-height: 500px;
+  }
+  .hideMobile {
+    display: none;
+  }
 }
 
 /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
@@ -151,7 +162,9 @@ input, select {
 
 /* Main Content Area */
 
-#deleteProjectButton, .deleteTaskButton, #taskFormCancel {
+#deleteProjectButton,
+.deleteTaskButton,
+#taskFormCancel {
   color: white;
   font-family: inherit;
   border-radius: 5px;
@@ -170,7 +183,8 @@ input, select {
   margin-top: 20px;
 }
 
-#addTaskButton, .editTaskButton {
+#addTaskButton,
+.editTaskButton {
   font-family: inherit;
   color: white;
   border: none;
@@ -194,8 +208,6 @@ input, select {
   align-items: baseline;
 }
 
-
-
 /* Task Form */
 
 #taskForm {
@@ -211,12 +223,13 @@ input, select {
   max-width: 400px;
   max-height: 400px;
   background-color: #fdeabe;
-  box-shadow: 3px 0px 17px 2px rgba(0,0,0,0.75);
+  box-shadow: 3px 0px 17px 2px rgba(0, 0, 0, 0.75);
   border-radius: 15px;
   z-index: 1;
 }
 
-#taskForm input, select {
+#taskForm input,
+select {
   margin-bottom: 20px;
   margin-top: 3px;
 }
